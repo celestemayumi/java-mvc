@@ -15,16 +15,21 @@ public class LivroService {
     @Autowired
     LivroRepository livroRepository;
 
-    public Livro salvarLivro(LivroRequest livroRequest){
+    public Livro salvarLivro(LivroRequest livroRequest) {
         Livro livro = requestToLivro(livroRequest);
         return livroRepository.save(livro);
     }
 
     public void atualizarLivro(Long id, LivroRequest livroRequest){
         Livro livro = buscarLivro(id);
-        if( livro != null ){
-             BeanUtils.copyProperties(livroRequest, livro);
+        if (livro != null) {
+            BeanUtils.copyProperties(livroRequest, livro);
+            livroRepository.save(livro);
         }
+    }
+
+    public void deletarLivro(Long id){
+        livroRepository.deleteById(id);
     }
 
     public Livro requestToLivro(LivroRequest livroRequest){
@@ -48,13 +53,9 @@ public class LivroService {
         return livroRepository.findAll();
     }
 
-    public Livro buscarLivro(Long id){
+    public Livro buscarLivro(Long id) {
         Optional<Livro> livro = livroRepository.findById(id);
         return livro.orElse(null);
-    }
-
-    public void deletarLivro(Long id ){
-        livroRepository.deleteById(id);
     }
 
 }

@@ -17,7 +17,7 @@ public class LivroController {
     @Autowired
     LivroService livroService;
     @GetMapping("/cadastro")
-    public ModelAndView livroCadastro(){
+    public ModelAndView livroCadastro() {
         ModelAndView mv = new ModelAndView("livroCadastro");
         mv.addObject("livroRequest", new LivroRequest());
         return mv;
@@ -25,7 +25,10 @@ public class LivroController {
 
     @PostMapping("/cadastrar")
     public ModelAndView cadastrarLivro(@Valid @ModelAttribute LivroRequest livroRequest) {
+        //mapear livroRequest para livro
+        // salvar o livro no bd
         Livro livro = livroService.salvarLivro(livroRequest);
+        //renderizar a pagina com a lista de livros cadastrados
         return listarLivros();
     }
 
@@ -56,7 +59,7 @@ public class LivroController {
     }
 
     @GetMapping("/deletar/{id}")
-    public ModelAndView deletaLivro(@PathVariable Long id){
+    public ModelAndView deletarLivro(@PathVariable Long id){
         livroService.deletarLivro(id);
         return listarLivros();
     }
