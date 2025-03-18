@@ -12,37 +12,36 @@
 <div th:replace="~{fragments/header.html :: header}"></div>
 <div class="main_content">
     <form method="post" th:action="@{cadastrar}" th:object="${livroRequest}">
-        <h2>Cadastro de Livro</h2>
+        <h2><span th:text="${#messages.msg('cadastrar.livro')}"></span></h2>
         <br>
-        <table>
-            <tr>
-                <td>Título:</td>
-                <td><input type="text" th:field="*{titulo}"></td>
-            </tr>
-            <tr>
-                <td>Autor:</td>
-                <td><input type="text" th:field="*{autor}"></td>
-            </tr>
-            <tr>
-                <td>Categoria:</td>
-                <td>
-                    <select name="categoria" th:field="*{categoria}">
-                        <option name="ROMANCE" value="ROMANCE">Romance</option>
-                        <option name="FICCAO" value="FICCAO">Ficção</option>
-                        <option name="FANTASIA" value="FANTASIA">Fantasia</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Preço:</td>
-                <td><input type="text" th:field="*{preco}"></td>
-            </tr>
-            <tr>
-                <td>ISBN:</td>
-                <td><input type="text" th:field="*{isbn}"></td>
-            </tr>
-            <tr><td colspan="2"><input type="submit" value="Cadastrar"></td></tr>
-        </table>
+        <div>
+            <label for="titulo"><span th:text="${#messages.msg('livro.atr.titulo')}"></span></label> <input type="text" id="titulo" th:field="*{titulo}">
+            <p th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}" th:errorclass="error"></p>
+        </div>
+        <div>
+            <label for="autor"><span th:text="${#messages.msg('livro.atr.autor')}"></span></label> <input type="text" id="autor" th:field="*{autor}">
+            <p th:if="${#fields.hasErrors('autor')}" th:errors="*{autor}" th:errorclass="error"></p>
+        </div>
+        <div>
+            <label for="categoria"><span th:text="${#messages.msg('livro.atr.categoria')}"></span></label>
+            <select name="categoria" th:field="*{categoria}">
+                <option name="ROMANCE" value="ROMANCE"><span th:text="${#messages.msg('livro.atr.categoria.romance')}"></span></option>
+                <option name="FICCAO" value="FICCAO"><span th:text="${#messages.msg('livro.atr.categoria.ficcao')}"></span></option>
+                <option name="FANTASIA" value="FANTASIA"><span th:text="${#messages.msg('livro.atr.categoria.fantasia')}"></span></option>
+            </select>
+            <p th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}" th:errorclass="error"></p>
+        </div>
+        <div>
+            <label for="preco"><span th:text="${#messages.msg('livro.atr.preco')}"></span></label> <input type="text" id="preco" th:field="*{preco}">
+            <p th:if="${#fields.hasErrors('preco')}" th:errors="*{preco}" th:errorclass="error"></p>
+        </div>
+        <div>
+            <label for="isbn"><span th:text="${#messages.msg('livro.atr.isbn')}"></span></label> <input type="text" id="isbn" th:field="*{isbn}">
+            <p th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}" th:errorclass="error"></p>
+        </div>
+        <div>
+            <button type="submit"><span th:text="${#messages.msg('cadastrar.cadastro')}"></span></button>
+        </div>
     </form>
 </div>
 <div th:replace="~{fragments/footer.html :: footer}"></div>
