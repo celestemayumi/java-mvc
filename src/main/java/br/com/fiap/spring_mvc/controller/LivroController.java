@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -26,25 +25,26 @@ public class LivroController {
     }
 
     @PostMapping("/cadastrar")
-    public String cadastrarLivro(@Valid LivroRequest livroRequest, Model model, BindingResult result) {
-        //mapear livroRequest para livro
-        if (result.hasErrors()){
+    public String cadastrarLivro(@Valid LivroRequest livroRequest, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "livroCadastro";
         }
-        // salvar o livro no bd
+        // mapear livroRequest para livro
+        // salvar livro no bd
         livroService.salvarLivro(livroRequest);
-        //renderizar a pagina com a lista de livros cadastrados
+        // renderizar a página com a lista de livros cadastrados
         return listarLivros(model);
     }
 
     @GetMapping("/lista")
-    public String listarLivros(Model model){
+    public String listarLivros(Model model) {
         List<Livro> livros = livroService.buscarLivros();
         model.addAttribute("listaLivros", livros);
-        return"livroLista";
+        return "livroLista";
     }
 
     @GetMapping("/edicao/{id}")
-    public String livroEdicao(@PathVariable Long id, Model model){
+    public String livroEdicao(@PathVariable Long id, Model model) {
         Livro livro = livroService.buscarLivro(id);
         if (livro == null) {
             return listarLivros(model);
@@ -55,7 +55,7 @@ public class LivroController {
     }
 
     @PostMapping("/editar/{id}")
-    public String editarLivro(@PathVariable Long id, @Valid @ModelAttribute LivroRequest livroRequest, Model model){
+    public String editarLivro(@PathVariable Long id, @Valid @ModelAttribute LivroRequest livroRequest, Model model) {
         livroService.atualizarLivro(id, livroRequest);
         return listarLivros(model);
     }
@@ -66,4 +66,3 @@ public class LivroController {
         return listarLivros(model);
     }
 }
-

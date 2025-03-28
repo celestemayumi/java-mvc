@@ -20,7 +20,7 @@ public class LivroService {
         return livroRepository.save(livro);
     }
 
-    public void atualizarLivro(Long id, LivroRequest livroRequest){
+    public void atualizarLivro(Long id, LivroRequest livroRequest) {
         Livro livro = buscarLivro(id);
         if (livro != null) {
             BeanUtils.copyProperties(livroRequest, livro);
@@ -28,11 +28,11 @@ public class LivroService {
         }
     }
 
-    public void deletarLivro(Long id){
+    public void deletarLivro(Long id) {
         livroRepository.deleteById(id);
     }
 
-    public Livro requestToLivro(LivroRequest livroRequest){
+    public Livro requestToLivro(LivroRequest livroRequest) {
         Livro livro = new Livro();
         //BeanUtils.copyProperties(livroRequest, livro);
         livro.setTitulo(livroRequest.getTitulo());
@@ -43,7 +43,7 @@ public class LivroService {
         return livro;
     }
 
-    public LivroRequest livroToRequest(Livro livro){
+    public LivroRequest livroToRequest(Livro livro) {
         LivroRequest livroRequest = new LivroRequest();
         BeanUtils.copyProperties(livro, livroRequest);
         return livroRequest;

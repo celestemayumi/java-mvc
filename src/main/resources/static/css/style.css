@@ -1,9 +1,9 @@
 .header {
-    background-color: rgba(127,127,127, 0.25);
+    background-color: rgba(127, 127, 127, 0.25);
     color: darkblue;
 }
 
-.main_Content {
+.main_content {
     padding: 50px 0 50px 50px;
 }
 
@@ -19,4 +19,3 @@ label {
 .error {
     color: red;
 }
-
